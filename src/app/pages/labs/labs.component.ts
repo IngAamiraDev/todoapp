@@ -16,14 +16,27 @@ export class LabsComponent {
     'Crear componente',
     'Crear servicio',
   ];
-  name = 'Andres';
-  age = 37;
+  name = 'Nicolas';
+  age = 18;
   disabled = true;
   img = 'https://w3schools.com/howto/img_avatar.png';
 
   person = {
-    name: 'Andres',
-    age: 37,
+    name: 'Nicolas',
+    age: 18,
     avatar: 'https://w3schools.com/howto/img_avatar.png'
+  }
+
+  clickHandler() {
+    alert('Hola')
+  }
+
+  changeHandler(event: Event) {
+    console.log(event);
+  }
+
+  keydownHandler(event: KeyboardEvent){
+    const input = event.target as HTMLInputElement;
+    console.log(input.value);
   }
 }
