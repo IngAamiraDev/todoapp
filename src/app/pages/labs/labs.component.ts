@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './labs.component.html',
-  styleUrl: './labs.component.css'
+  styleUrls: ['./labs.component.css']
 })
 export class LabsComponent {
   welcome = 'Bienvenido a mi primera aplicación con Angular';
@@ -16,4 +16,6 @@ export class LabsComponent {
     'Crear componente',
     'Crear servicio',
   ];
+  name = 'Andres';
+  age = 37;
 }
