@@ -1,16 +1,18 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Task } from './../../models/task.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
   tasks = signal<Task[]>([
     {
       id: Date.now(),
@@ -21,22 +23,33 @@ export class HomeComponent {
       id: Date.now(),
       title: 'Crear componenentes',
       completed: false
-    },
+    }
   ]);
 
-  changeHandler(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const newTask = input.value;
-    this.addTask(newTask);
+  newTaskCtrl = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+    ]
+  });
+
+  changeHandler() {
+    if (this.newTaskCtrl.valid) {
+      const value = this.newTaskCtrl.value.trim();
+      if (value !== '') {
+        this.addTask(value);
+        this.newTaskCtrl.setValue('');
+      }
+    }
   }
 
   addTask(title: string) {
     const newTask = {
       id: Date.now(),
       title,
-      completed: false,
-    };
-    this.tasks.update((tasks) => [...tasks, newTask]);
+      completed: false
+    }
+    this.tasks.update(prevState => [...prevState, newTask]);
   }
 
   deleteTask(index: number) {
