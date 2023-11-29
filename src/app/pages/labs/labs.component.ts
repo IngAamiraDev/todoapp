@@ -17,7 +17,7 @@ export class LabsComponent {
     'Crear componente',
     'Crear servicio',
   ]);
-  name = signal('Nicolas');
+  name = signal('andres');
   age = 18;
   disabled = true;
   img = 'https://w3schools.com/howto/img_avatar.png';
@@ -32,7 +32,7 @@ export class LabsComponent {
   widthCtrl = new FormControl(50, {
     nonNullable: true,
   });
-  nameCtrl = new FormControl('nicolas', {
+  nameCtrl = new FormControl('andres', {
     nonNullable: true,
     validators: [
       Validators.required,
