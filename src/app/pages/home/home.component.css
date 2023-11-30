@@ -35,39 +35,10 @@ body {
 
 /* Estilos específicos del componente home */
 .container {
-  min-width: 230px;
+  min-width: 650px; /*Se debe configurar automático*/
   max-width: 550px;
   margin: 0 auto;
 }
-
-/*
-.header {
-  background-image: linear-gradient(
-    224deg,
-    hsl(240deg 100% 50%) 2%,
-    hsl(249deg 100% 59%) 63%,
-    hsl(252deg 99% 64%) 78%,
-    hsl(253deg 98% 68%) 87%,
-    hsl(254deg 96% 73%) 92%,
-    hsl(253deg 93% 77%) 96%,
-    hsl(251deg 89% 81%) 98%,
-    hsl(246deg 81% 85%) 99%,
-    hsl(232deg 68% 88%) 100%,
-    hsl(200deg 53% 90%) 100%
-  );
-  padding-bottom: 4rem;
-}*/
-
-/*
-.header {
-  background-image: linear-gradient(
-    135deg,
-    #4c33b1 0%,
-    #6e49fe 50%,
-    #59A193 100%
-  );
-  padding-bottom: 4rem;
-}*/
 
 .header {
   background-image: linear-gradient(
@@ -78,7 +49,6 @@ body {
   );
   padding-bottom: 4rem;
 }
-
 
 .hidden {
   display: none;
@@ -93,18 +63,8 @@ body {
   overflow: hidden;
 }
 
-.todoapp input::-webkit-input-placeholder {
-  font-style: italic;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.4);
-}
-
-.todoapp input::-moz-placeholder {
-  font-style: italic;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.4);
-}
-
+.todoapp input::-webkit-input-placeholder,
+.todoapp input::-moz-placeholder,
 .todoapp input::input-placeholder {
   font-style: italic;
   font-weight: 400;
@@ -232,7 +192,7 @@ body {
 .todo-list li .toggle {
   text-align: center;
   width: 40px;
-  /* auto, since non-WebKit browsers doesn't support input styling */
+  /* auto, since non-WebKit browsers don't support input styling */
   height: auto;
   position: absolute;
   top: 0;
@@ -242,17 +202,10 @@ body {
   /* Mobile Safari */
   -webkit-appearance: none;
   appearance: none;
-}
-
-.todo-list li .toggle {
   opacity: 0;
 }
 
 .todo-list li .toggle + label {
-  /*
-        Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
-        IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
-    */
   background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23949494%22%20stroke-width%3D%223%22/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center left;
@@ -317,14 +270,16 @@ body {
 
 .footer {
   padding: 1rem 1.5rem;
-  height: 20px;
+  height: 65px;
   text-align: center;
   font-size: 15px;
   border-top: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .todo-count {
-  float: left;
   text-align: left;
 }
 
@@ -336,13 +291,11 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
-  position: absolute;
-  right: 0;
-  left: 0;
+  display: flex;
 }
 
 .filters li {
-  display: inline;
+  margin-right: 10px;
 }
 
 .filters li a {
@@ -363,14 +316,19 @@ body {
 }
 
 .clear-completed,
-html .clear-completed:active {
+.complete-all,
+html .clear-completed:active,
+html .complete-all:active {
   float: right;
   position: relative;
   line-height: 19px;
   text-decoration: none;
   cursor: pointer;
+  margin-left: 10px;
+  z-index: 2;
 }
 
+.complete-all:hover,
 .clear-completed:hover {
   text-decoration: underline;
 }
@@ -397,10 +355,7 @@ html .clear-completed:active {
   text-decoration: underline;
 }
 
-/*
-    Hack to remove background from Mobile Safari.
-    Can't use it globally since it destroys checkboxes in Firefox
-*/
+/* Hack para eliminar el fondo de Mobile Safari */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   .toggle-all,
   .todo-list li .toggle {
