@@ -64,4 +64,4 @@ dist-ssr
 **.angular
 
 # Pages
-/src/app/pages/labs/
+#/src/app/pages/labs/

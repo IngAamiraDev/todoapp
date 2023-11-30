@@ -1,35 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
-html,
-body {
+/* Reset de estilos para un mejor rendimiento en todos los navegadores */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  font-size: 100%;
-  vertical-align: baseline;
-  font-family: inherit;
-  font-weight: inherit;
-  color: inherit;
-  -webkit-appearance: none;
-  appearance: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+/* Estilos generales para el cuerpo del documento */
 body {
   font-family: "Roboto", sans-serif;
-  background: #f5f5f5;
+  background-color: #f5f5f5;
   color: #111111;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 300;
+  line-height: 1.6;
 }
 
+/* Eliminar el resplandor predeterminado al hacer clic en los elementos enfocables */
 :focus {
   outline: 0;
+}
+
+/* Estilos para botones y enlaces */
+button,
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilos globales para contenedores */
+.container {
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* Estilo para resaltar texto importante */
+.highlight {
+  color: #59A193; /* Cambia el color según tu preferencia */
+  font-weight: bold;
 }
