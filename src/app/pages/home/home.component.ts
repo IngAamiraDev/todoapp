@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, Injector, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -13,20 +13,8 @@ import { Task } from './../../models/task.model';
 })
 export class HomeComponent {
 
-  tasks = signal<Task[]>([
-    {
-      id: Date.now(),
-      title: 'Crear proyecto',
-      completed: true
-    },
-    {
-      id: Date.now(),
-      title: 'Crear componenentes',
-      completed: false
-    }
-  ]);
+  tasks = signal<Task[]>([]);
   filter = signal<'all' | 'pending' | 'completed'>('all');
-  //Estados computados
   tasksByFilter = computed(() => {
     const filter = this.filter();
     const tasks = this.tasks();
@@ -45,6 +33,25 @@ export class HomeComponent {
       Validators.required,
     ]
   });
+
+  injector = inject(Injector);
+
+  ngOnInit() {
+    const storage = localStorage.getItem('tasks');
+    if (storage) {
+      const tasks = JSON.parse(storage);
+      this.tasks.set(tasks);
+    }
+    this.trackTasks();
+  }
+
+  trackTasks() {
+    effect(() => {
+      const tasks = this.tasks();
+      console.log(tasks);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, { injector: this.injector });
+  }
 
   changeHandler() {
     if (this.newTaskCtrl.valid) {
@@ -66,21 +73,25 @@ export class HomeComponent {
   }
 
 
+  // Eliminado por index
+  // Html: <button class="destroy" (click)="deleteTask(i)"></button>
   /*
-  Eliminado por index
   deleteTask(index: number) {
     this.tasks.update((tasks) => tasks.filter((task, position) => position !== index));
   }*/
 
+
   // Eliminado por id
+  // Html: <button class="destroy" (click)="deleteTask(task.id)"></button>
+
   deleteTask(id: number) {
     this.tasks.update((tasks) => tasks.filter((task) => task.id !== id))
   }
 
-  /*
-  Revisar mutate
-  Fuente: https://angular.dev/guide/signals#writable-signals
 
+  // Revisar mutate
+  // Fuente: https://angular.dev/guide/signals#writable-signals
+  /*
   deleteTask(index: number) {
     this.tasks.mutate(state => {
       state.splice(index, 1);
