@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -25,6 +25,19 @@ export class HomeComponent {
       completed: false
     }
   ]);
+  filter = signal<'all' | 'pending' | 'completed'>('all');
+  //Estados computados
+  tasksByFilter = computed(() => {
+    const filter = this.filter();
+    const tasks = this.tasks();
+    if (filter === 'pending') {
+      return tasks.filter(task => !task.completed);
+    }
+    if (filter === 'completed') {
+      return tasks.filter(task => task.completed);
+    }
+    return tasks;
+  })
 
   newTaskCtrl = new FormControl('', {
     nonNullable: true,
@@ -52,19 +65,27 @@ export class HomeComponent {
     this.tasks.update(prevState => [...prevState, newTask]);
   }
 
+
+  /*
+  Eliminado por index
   deleteTask(index: number) {
     this.tasks.update((tasks) => tasks.filter((task, position) => position !== index));
+  }*/
+
+  // Eliminado por id
+  deleteTask(id: number) {
+    this.tasks.update((tasks) => tasks.filter((task) => task.id !== id))
   }
 
-  // Revisar mutate
-  // Fuente: https://angular.dev/guide/signals#writable-signals
   /*
-    deleteTask(index: number) {
-      this.tasks.mutate(state => {
-        state.splice(index, 1);
-      })
-    }
-  */
+  Revisar mutate
+  Fuente: https://angular.dev/guide/signals#writable-signals
+
+  deleteTask(index: number) {
+    this.tasks.mutate(state => {
+      state.splice(index, 1);
+    })
+  }*/
 
   updateTask(index: number) {
     this.tasks.update((tasks) => {
@@ -81,16 +102,15 @@ export class HomeComponent {
   }
 
   /*
-    updateTask(index: number) {
-      this.tasks.mutate(state => {
-        const currentTask = state[index];
-        state[index] = {
-          ...currentTask,
-          completed: !currentTask.completed
-        }
-      })
-    }
-  */
+  updateTask(index: number) {
+    this.tasks.mutate(state => {
+      const currentTask = state[index];
+      state[index] = {
+        ...currentTask,
+        completed: !currentTask.completed
+      }
+    })
+  }*/
 
   updateTaskEditingMode(index: number) {
     this.tasks.update(prevState => {
@@ -123,6 +143,10 @@ export class HomeComponent {
         return task;
       })
     });
+  }
+
+  changeFilter(filter: 'all' | 'pending' | 'completed') {
+    this.filter.set(filter);
   }
 
 }
