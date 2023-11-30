@@ -1,27 +1,51 @@
-# Todoapp
+# To-Do App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+This is a simple To-Do application project developed in Angular.
 
-## Development server
+## Features
+The To-Do App provides a simple and intuitive interface for managing your tasks. Here's how you can make the most of it:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Add Tasks:** You can add new tasks by entering a title and pressing "Enter."
+- **Mark as Completed:** You can mark a task as completed by clicking on the checkbox.
+- **Delete Task:** You can delete a task by clicking on the delete button next to it.
+- **Filter Tasks:** You can filter tasks by "all," "pending," or "completed."
+- **Edit Task:** You can edit the text of a task by double-clicking on it.
 
-## Code scaffolding
+## Development
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
 
-## Build
+Before you begin, ensure you have met the following requirements:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Node.js installed
+- Angular v17.0.0
+- Angular CLI installed
 
-## Running unit tests
+## Contributing
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+If you want to contribute to this project, follow these steps:
 
-## Running end-to-end tests
+1. Fork the repository
+2. Create a branch for your feature: `git checkout -b feature/new-feature`
+3. Make your changes and commit: `git commit -m "Add new feature"`
+4. Push your changes: `git push origin feature/new-feature`
+5. Open a Pull Request on GitHub
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Installation
 
-## Further help
+1. Clone this repository: `git clone https://github.com/IngAamiraDev/todoapp.git`
+2. Navigate to the directory: `cd todoapp`
+3. Install dependencies: `npm install`
+4. Start the application: `ng serve`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Usage
+
+Include any additional information on how to use the application, command-line arguments, or configuration options.
+
+## Troubleshooting
+
+Include common issues users might encounter and their solutions.
+
+## FAQ
+
+Answer frequently asked questions to help users better understand the project.
